@@ -1,0 +1,21 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: wecode_postgres
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5432:5432"
+    #volumes:
+    # - ./pgdata:/var/lib/postgresql/data
+    networks:
+      - wecode_network
+
+networks:
+  wecode_network:
+    driver: bridge

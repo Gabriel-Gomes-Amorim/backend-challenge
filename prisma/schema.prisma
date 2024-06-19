@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Status {
+  pending
+  in_progress
+  completed
+}
+
+model User {
+  id         String   @id @default(uuid())
+  username   String
+  password   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String
+  status      Status
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+
+  @@map("tasks")
+}
